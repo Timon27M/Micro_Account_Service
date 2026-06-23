@@ -45,10 +45,12 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
+            <version>10.10.0</version>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-database-postgresql</artifactId>
+            <version>10.10.0</version>
         </dependency>
 
         <dependency>
@@ -161,7 +163,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>10.10.0</version>
                 <configuration>
-                    <url>jdbc:postgresql://localhost:5571/user_service_db</url>
+                    <url>jdbc:postgresql://localhost:5571/account_service_db</url>
                     <user>postgres</user>
                     <password>postgres</password>
                     <locations>
