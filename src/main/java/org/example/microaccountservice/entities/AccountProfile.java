@@ -18,12 +18,12 @@ import java.util.UUID;
 )
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Builder
 public class AccountProfile {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "account_id", nullable = false, updatable = false)
     private UUID accountId;
 
@@ -64,6 +64,20 @@ public class AccountProfile {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private OffsetDateTime updatedAt;
+
+    public AccountProfile(UUID userId, String accountNumber) {
+        this.userId = userId;
+        this.accountNumber = accountNumber;
+
+        this.accountType = AccountType.CURRENT;
+        this.currency = Currency.RUB;
+        this.status = AccountStatus.PENDING;
+
+        this.availableBalance = BigDecimal.ZERO;
+        this.currentBalance = BigDecimal.ZERO;
+
+        this.openedAt = OffsetDateTime.now();
+    }
 
     public enum AccountType {
         CURRENT,

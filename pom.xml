@@ -79,6 +79,18 @@
             <artifactId>spring-dotenv</artifactId>
             <version>4.0.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>net.devh</groupId>
+            <artifactId>grpc-server-spring-boot-starter</artifactId>
+            <version>3.1.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.finflow.schemas</groupId>
+            <artifactId>account-service-grpc</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
