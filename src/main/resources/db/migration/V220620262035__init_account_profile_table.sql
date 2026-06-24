@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS account_profile (
     account_number VARCHAR(34) NOT NULL UNIQUE,
 
     account_type VARCHAR(20) NOT NULL DEFAULT 'CURRENT',
-    currency CHAR(3) NOT NULL DEFAULT 'RUB',
+    currency VARCHAR(3) NOT NULL DEFAULT 'RUB',
 
     status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
 
