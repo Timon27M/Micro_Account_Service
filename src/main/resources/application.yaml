@@ -1,6 +1,6 @@
 grpc:
   server:
-    port: 9071
+    port: ${GRPC_PORT}
 
 server:
   port: ${SERVER_PORT}
