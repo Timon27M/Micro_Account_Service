@@ -6,7 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -52,18 +52,18 @@ public class AccountProfile {
     private BigDecimal currentBalance;
 
     @Column(name = "opened_at", nullable = false)
-    private OffsetDateTime openedAt;
+    private Instant openedAt;
 
     @Column(name = "closed_at")
-    private OffsetDateTime closedAt;
+    private Instant closedAt;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
-    private OffsetDateTime createdAt;
+    private Instant createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
-    private OffsetDateTime updatedAt;
+    private Instant updatedAt;
 
     public AccountProfile(UUID userId, String accountNumber) {
         this.userId = userId;
@@ -76,7 +76,7 @@ public class AccountProfile {
         this.availableBalance = BigDecimal.ZERO;
         this.currentBalance = BigDecimal.ZERO;
 
-        this.openedAt = OffsetDateTime.now();
+        this.openedAt = Instant.now();
     }
 
     public enum AccountType {

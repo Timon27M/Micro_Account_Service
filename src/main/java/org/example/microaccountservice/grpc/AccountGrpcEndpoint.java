@@ -40,7 +40,18 @@ public class AccountGrpcEndpoint extends AccountServiceGrpc.AccountServiceImplBa
         try {
             accountProfileService.addOrGetToCacheAccountData(userId);
         } catch (AccountNotFoundException e) {
-            throw new RuntimeException(e);
+            responseObserver.onError(
+                    io.grpc.Status.NOT_FOUND
+                            .withDescription(e.getMessage())
+                            .asRuntimeException());
+            return;
         }
+        AddToCacheAccountDataResponse response = AddToCacheAccountDataResponse.newBuilder()
+                .setMessage("Success")
+                .setSuccess(true)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 }

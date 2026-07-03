@@ -1,9 +1,12 @@
 package org.example.microaccountservice.services;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.microaccountservice.entities.AccountProfile;
 import org.example.microaccountservice.exceptions.AccountAlreadyExistsException;
 import org.example.microaccountservice.repositories.AccountProfileRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.security.auth.login.AccountNotFoundException;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AccountProfileService {
@@ -31,9 +35,21 @@ public class AccountProfileService {
         return account;
     }
 
-    @Cacheable(value = "accounts", key = "#accountId")
-    public AccountProfile addOrGetToCacheAccountData(UUID accountId) throws AccountNotFoundException {
-        return accountProfileRepository.findById(accountId).orElseThrow(() -> new AccountNotFoundException("Account with user_id: " + accountId.toString() + " not found"));
+    @Cacheable(value = "accounts", key = "#userId")
+    public AccountProfile addOrGetToCacheAccountData(UUID userId) throws AccountNotFoundException {
+        return accountProfileRepository.findByUserId(userId).orElseThrow(() -> new AccountNotFoundException("Account with user_id: " + userId.toString() + " not found"));
+    }
+
+    @CachePut(value = "accounts", key = "#userId")
+    public AccountProfile update(AccountProfile account) {
+
+        return accountProfileRepository.save(account);
+    }
+
+    @CacheEvict(value = "accounts", key = "#userId")
+    public void delete(UUID accountId) {
+
+        accountProfileRepository.deleteById(accountId);
     }
 
     private String generateAccountNumber() {

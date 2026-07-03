@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface AccountProfileRepository extends JpaRepository<AccountProfile, UUID> {
     boolean existsByUserId(UUID userId);
+
+    Optional<AccountProfile> findByUserId(UUID userId);
 }
