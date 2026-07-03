@@ -1,0 +1,1 @@
+CREATE INDEX idx_account_userid ON account_profile (user_id);

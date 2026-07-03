@@ -19,6 +19,17 @@ services:
       retries: 5
       start_period: 30s
 
+  account-redis:
+    image: redis:7-alpine
+    env_file:
+      - ../.env
+    container_name: account-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT}:6379"
+    networks:
+      - account-service-network
+
 volumes:
   postgres_data:
     driver: local
