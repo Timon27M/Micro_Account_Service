@@ -33,9 +33,15 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${KEYCLOAK_HOST}:${KEYCLOAK_PORT}/realms/finflow
+
   jackson:
     deserialization:
-      fail-on-unknown-properties: true  # ? ????????? ??????? ? ???????????? ??????
+      fail-on-unknown-properties: true
 
 
   flyway:
