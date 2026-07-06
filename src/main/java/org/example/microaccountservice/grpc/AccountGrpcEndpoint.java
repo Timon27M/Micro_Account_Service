@@ -5,9 +5,9 @@ import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.example.microaccountservice.entities.AccountProfile;
+import org.example.microaccountservice.exceptions.AccountNotFoundException;
 import org.example.microaccountservice.services.AccountProfileService;
 
-import javax.security.auth.login.AccountNotFoundException;
 import java.util.UUID;
 
 @GrpcService
